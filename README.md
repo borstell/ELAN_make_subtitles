@@ -24,6 +24,6 @@ By adding more arguments in the command line input, you can choose to create cli
 ```
 python3 ELAN_make_subtitles.py 60"
 ```
-makes the output file 60% of the speed of the original video file. The generated output filen below (converted to `.gif`).
+makes the output file 60% of the speed of the original video file. The generated output file below (converted to `.gif`).
 
 ![Example](https://github.com/borstell/ELAN_make_subtitles/blob/master/Example_SSLC.gif)
