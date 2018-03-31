@@ -14,7 +14,7 @@ python ELAN_make_subtitles.py
 ```
 and `.mp4` video files (with subtitles, if text is added to ELAN annotation cells) are generated and saved to the directory.
 
-For example, in the Swedish Sign Language Corpus file `SSLC01_003.eaf`, there are two associated video files. They are distinguished by containing the signer id number of the two signers ("S001" and "S002"). Thus, we can create a tier called "make_subtitles_S002" that will be associated with the video on the right in the image below, through the identifier "S002".
+For example, in the [Swedish Sign Language Corpus](https://www.ling.su.se/teckenspr%C3%A5ksresurser/teckenspr%C3%A5kskorpusar/svensk-teckenspr%C3%A5kskorpus) file `SSLC01_003.eaf`, there are two associated video files. They are distinguished by containing the signer id number of the two signers ("S001" and "S002"). Thus, we can create a tier called "make_subtitles_S002" that will be associated with the video on the right in the image below, through the identifier "S002".
 
 ![ELAN](https://github.com/borstell/ELAN_make_subtitles/blob/master/Example_SSLC_ELAN.png)
 
