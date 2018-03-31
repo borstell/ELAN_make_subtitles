@@ -1,5 +1,4 @@
 # ELAN_make_subtitles
-Creates (subtitled) video clips from ELAN annotations
 
 This script uses the MoviePy module to create video clips (with subtitles) from ELAN annotations. The output is an `.mp4` file with the same name as the original video file but `_subtitles_N` added to the end (where "N" is the chronological position of the clip in the `.eaf` file, in case of several clips generated from the same original file).
 
