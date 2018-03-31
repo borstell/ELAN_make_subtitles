@@ -1,7 +1,7 @@
 from __future__ import print_function
 from moviepy.editor import *
 from collections import defaultdict
-import os,sys#,string
+import os,sys
 try:
 	from xml.etree import cElementTree as et
 except ImportError:
