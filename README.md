@@ -22,7 +22,7 @@ In the above image, the stretch of signing is rather long, and thus there is an 
 
 By adding more arguments in the command line input, you can choose to create clips from another tier, as long as the tiername is of the type "tiername_...", where "..." represents a unique video file identifier. It is also possible to make the output video files slower (or, faster) by adding an argument specifying the speed in % of the original. For example
 ```
-python3 ELAN_make_subtitles.py 60"
+python3 ELAN_make_subtitles.py 60
 ```
 makes the output file 60% of the speed of the original video file. The generated output file below (converted to `.gif`).
 
