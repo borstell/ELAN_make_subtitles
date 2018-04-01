@@ -71,7 +71,7 @@ def make_video(videofile,clip,num,speed):
 			split = text.split(" ")
 			mod = []
 			for n in range(len(split)):
-				if n == round(len(split)/2):
+				if n == round(len(split)/2)-1:
 					mod.append(split[n]+"\n")
 				else:
 					mod.append(split[n])
