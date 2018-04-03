@@ -2,7 +2,7 @@
 
 This script uses the [MoviePy](https://zulko.github.io/moviepy/) module to create video clips (with subtitles) from ELAN annotations. The output is an `.mp4` file with the same name as the original video file but `_subtitles_N` added to the end (where "N" is the chronological position of the clip in the `.eaf` file, in case of several clips generated from the same original file).
 
-In order to use it, you need the `.py` file on your computer, located in the same file as your `.eaf` files and their associated video files. By creating a new tier with the name "make_subtitles_...", where "..." represents a unique identifier for the video file associated with the tier, the script finds the annotations and outputs video files. NB: The video file identifier has to distinguish it from any other associated video files. For example, if you have an `.eaf` file with two associated videos (`video1.mp4` and `video2.mp4`), you can create an ELAN tier with the name "make_subtitles_1", and the script then uses `video1.mp4` as the associated video file.
+In order to use it, you need the `.py` file on your computer, located in the same file as your `.eaf` files and their associated video files. By creating a new tier with the name "make_subtitles_\<videoID\>", where "\<videoID\>" represents a unique identifier for the video file associated with the tier, the script finds the annotations and outputs video files. NB: The video file identifier has to distinguish it from any other associated video files. For example, if you have an `.eaf` file with two associated videos (`video1.mp4` and `video2.mp4`), you can create an ELAN tier with the name "make_subtitles_1", and the script then uses `video1.mp4` as the associated video file.
 
 You run the script by entering
 ```
@@ -20,7 +20,7 @@ For example, in the [Swedish Sign Language Corpus](https://www.ling.su.se/tecken
 
 In the above image, the stretch of signing is rather long, and thus there is an added "//" in the middle of the annotation cell text. The script will automatically split all texts at "//" and put separate subtitle timings at even split points. Longer text without "//" will get an automatic line break in the subtitle text.
 
-By adding more arguments in the command line input, you can choose to create clips from another tier, as long as the tiername is of the type "tiername_...", where "..." represents a unique video file identifier and this is specified with `--tiername` (or `-t`). If your target tier is called "default_\<videoID\>", you can use the following command line input:
+By adding more arguments in the command line input, you can choose to create clips from another tier, as long as the tiername is of the type "tiername_\<videoID\>", where "\<videoID\>" represents a unique video file identifier and this is specified with `--tiername` (or `-t`). If your target tier is called "default_\<videoID\>", you can use the following command line input:
 ```
 python3 ELAN_make_subtitles.py --tiername default
 ```
