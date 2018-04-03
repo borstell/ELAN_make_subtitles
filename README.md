@@ -20,9 +20,13 @@ For example, in the [Swedish Sign Language Corpus](https://www.ling.su.se/tecken
 
 In the above image, the stretch of signing is rather long, and thus there is an added "//" in the middle of the annotation cell text. The script will automatically split all texts at "//" and put separate subtitle timings at even split points. Longer text without "//" will get an automatic line break in the subtitle text.
 
-By adding more arguments in the command line input, you can choose to create clips from another tier, as long as the tiername is of the type "tiername_...", where "..." represents a unique video file identifier. It is also possible to make the output video files slower (or, faster) by adding an argument specifying the speed in % of the original. For example
+By adding more arguments in the command line input, you can choose to create clips from another tier, as long as the tiername is of the type "tiername_...", where "..." represents a unique video file identifier and this is specified with `--tiername` (or `-t`):
 ```
-python3 ELAN_make_subtitles.py 60
+python3 ELAN_make_subtitles.py --tiername default
+```
+It is also possible to make the output video files slower (or, faster) by adding a speed argument (`--speed` or `-s`) specifying the speed in % of the original. For example
+```
+python3 ELAN_make_subtitles.py --speed 60
 ```
 makes the output file 60% of the speed of the original video file. The generated output file below (converted to `.gif`).
 
