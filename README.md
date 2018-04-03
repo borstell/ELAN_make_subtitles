@@ -20,7 +20,7 @@ For example, in the [Swedish Sign Language Corpus](https://www.ling.su.se/tecken
 
 In the above image, the stretch of signing is rather long, and thus there is an added "//" in the middle of the annotation cell text. The script will automatically split all texts at "//" and put separate subtitle timings at even split points. Longer text without "//" will get an automatic line break in the subtitle text.
 
-By adding more arguments in the command line input, you can choose to create clips from another tier, as long as the tiername is of the type "tiername_...", where "..." represents a unique video file identifier and this is specified with `--tiername` (or `-t`). If your target tier is called "default_<videoID>", you can use the following command line input:
+By adding more arguments in the command line input, you can choose to create clips from another tier, as long as the tiername is of the type "tiername_...", where "..." represents a unique video file identifier and this is specified with `--tiername` (or `-t`). If your target tier is called "default_\<videoID\>", you can use the following command line input:
 ```
 python3 ELAN_make_subtitles.py --tiername default
 ```
