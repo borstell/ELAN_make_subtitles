@@ -1,7 +1,7 @@
 from __future__ import print_function
 from moviepy.editor import *
 from collections import defaultdict
-import os,sys
+import os,sys,argparse
 try:
 	from xml.etree import cElementTree as et
 except ImportError:
@@ -48,13 +48,13 @@ def get_clips(root,tiername):
 				clips[videofile].append((times[t1],times[t2],text))
 	return clips
 
-def get_texts(texts,dur):
+def get_texts(texts,dur,w):
 	"""
 	Creates individual TextClip objects in case of longer sequences and returns objects in a list
 	"""
 	subs = []
 	for n,text in enumerate(texts):
-		subs.append(TextClip(text,font="Georgia-Bold",fontsize=20,color="white",bg_color="black").set_pos(("center","bottom")).set_start(n*dur+n*0.05).set_duration(dur-(n*0.05)))
+		subs.append(TextClip(text,font="Arial-Bold",fontsize=w/30,color="white",bg_color="black").set_pos(("center","bottom")).set_start(n*dur+n*0.05).set_duration(dur-(n*0.05)))
 	return subs
 
 def make_video(videofile,clip,num,speed):
@@ -65,9 +65,11 @@ def make_video(videofile,clip,num,speed):
 	t2 = clip[1]/1000
 	texts = clip[2].split("//")
 	dur = (t2-t1)/len(texts)
+	v = VideoFileClip(videofile).subclip(t1,t2)
+	w = v.w
 	short_texts = []
 	for text in texts:
-		if len(text)>25:
+		if len(text)>w/20:
 			split = text.split(" ")
 			mod = []
 			for n in range(len(split)):
@@ -78,20 +80,15 @@ def make_video(videofile,clip,num,speed):
 			short_texts.append(" ".join(mod))
 		else:
 			short_texts = texts
-	v = VideoFileClip(videofile).subclip(t1,t2)
-	subs = get_texts(short_texts,dur)
+	subs = get_texts(short_texts,dur,w)
 	video = CompositeVideoClip([v]+subs).speedx(speed/100)
 	clipfile = videofile.split(".")[0]+"_subtitles_"+str(num+1)+".mp4"
-	video.write_videofile(clipfile)
+	video.write_videofile(clipfile,temp_audiofile="temp-audio.m4a", remove_temp=True, codec="libx264", audio_codec="aac")
 
-def make_all_clips(tiername=None,speed=None):
+def make_all_clips(tiername,speed):
 	"""
 	Iterates through .eaf files in a directory and looks for clips to subtitles. Creates videos when found
 	"""
-	if tiername is None:
-		tiername = "make_subtitles"
-	if speed is None:
-		speed = 100
 	for f in os.listdir():
 		if f.endswith(".eaf"):
 			clips = get_clips(et.parse(f).getroot(),tiername)
@@ -105,17 +102,11 @@ def main():
 	"""
 	Main function looks for arguments <tiername> and <speed>. If not found, defaults are given
 	"""
-	if len(sys.argv)>1:
-		tiername = None
-		speed = None
-		for a in sys.argv[1:]:
-			if a.isdigit():
-				speed = int(a)
-			else:
-				tiername = a
-		make_all_clips(tiername,speed)
-	else:
-		make_all_clips()
+	parser = argparse.ArgumentParser()
+	parser.add_argument("-t", "--tiername", help="Name of tier", type=str, default="make_subtitles")
+	parser.add_argument("-s", "--speed", help="Speed of output video", type=int, default=100)
+	args = parser.parse_args()
+	make_all_clips(args.tiername,args.speed)
 
 if __name__=="__main__":
 	main()
