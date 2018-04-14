@@ -37,10 +37,13 @@ def get_clips(root,tiername):
 			videos.append(v)
 	for tier in root.iter("TIER"):
 		if tier.attrib["TIER_ID"].startswith(tiername):
-			video = tier.attrib["TIER_ID"].split("_")[-1]
-			for v in videos:
-				if video in v:
-					videofile = v
+			if len(videos) == 1:
+				videofile = videos[0]
+			else:
+				video = tier.attrib["TIER_ID"].split("_")[-1]
+				for v in videos:
+					if video in v:
+						videofile = v
 			for cell in tier.iter('ALIGNABLE_ANNOTATION'):
 				t1 = cell.attrib["TIME_SLOT_REF1"]
 				t2 = cell.attrib["TIME_SLOT_REF2"]
